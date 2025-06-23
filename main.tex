@@ -1,0 +1,90 @@
+\documentclass[letterpaper,11pt]{article}
+
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{titlesec}
+\usepackage{titling}
+\usepackage{xcolor}
+\usepackage{parskip}
+\usepackage{fancyhdr}
+\usepackage{helvet}
+\renewcommand{\familydefault}{\sfdefault}
+
+% Custom command
+\newcommand{\resumesection}[1]{
+  \vspace{8pt}
+  \noindent\textbf{\Large #1} \\
+  \vspace{2pt}
+}
+
+\begin{document}
+
+\begin{center}
+    \textbf{\Huge \scshape Christopher Ton} \\
+    \href{mailto:christopher.ton@sjsu.edu}{christopher.ton@sjsu.edu} ~|~ (669) 254-6967 ~|~ \href{https://linkedin.com/in/chriztopherton/}{linkedin.com/in/chriztopherton} ~|~ \href{https://github.com/chriztopherton}{github.com/chriztopherton} ~|~ US Citizen
+\end{center}
+
+\resumesection{Experience}
+
+\textbf{Genentech \hfill San Diego County, CA}\par
+\textit{Data Engineer} \hfill Apr 2024--Present
+\begin{itemize}[leftmargin=0.15in, itemsep=1pt, parsep=0pt]
+    \item Built and deployed a full stack LLM-powered chat assistant using Streamlit, owning end-to-end architecture including data ingestion, ETL, prompt engineering, model evaluation, inferencing, and deployment using Docker and Kubernetes.
+    \item Designed and implemented scalable ETL pipelines to process and embed Confluence-based documentation into Azure AI Search, enabling semantic search through RAG and LangChain workflows.
+    \item Developed serverless APIs using AWS Lambda, S3, Bedrock, and OpenSearch to support multiple Retrieval-Augmented Generation (RAG) applications, reducing latency and improving maintainability.
+    \item Engineered performant data models in Snowflake using Talend, PySpark, and SQL across 7+ global sources; leveraged dbt to enforce testing and materializations via GitLab CI/CD pipelines.
+\end{itemize}
+
+\textit{Data Scientist Intern} \hfill Jun 2022--Apr 2024
+\begin{itemize}[leftmargin=0.15in, itemsep=1pt, parsep=0pt]
+    \item Reduced resolution times by 20\% and drove improvements in operational efficiency by developing and monitoring predictive anomaly detection models using XGBoostRegressor, in partnership with C3.AI.
+    \item Automated clinical reporting validation processes by building and deploying a sliding-window search module in R, reducing manual effort, streamlining cross-checks, and enhancing data accuracy and reliability.
+\end{itemize}
+
+\textbf{Deloitte \hfill Remote}\par
+\textit{Data Engineer via Brooksource} \hfill  Feb 2022--May 2022
+\begin{itemize}[leftmargin=0.15in, itemsep=1pt, parsep=0pt]
+    \item Deployed data pipelines using Informatica TDM to automate sensitive data masking, ensuring compliance with data protection regulations and minimizing security risks.
+    \item Developed Python-based solutions to model data distributions and population parameters, enabling risk assessment for data re-identification through quasi-identifier and pseudo-anonymization analysis.
+\end{itemize}
+
+\textbf{Shell Recharge (formerly Volta Charging) \hfill San Francisco Bay Area County, CA}\par
+\textit{Data Curator} \hfill Nov 2021--Mar 2022
+\begin{itemize}[leftmargin=0.15in, itemsep=1pt, parsep=0pt]
+    \item Automated and optimized data ingestion workflows by developing Python scripts to extract, transform, and curate datasets from over three vendor sources, achieving a 30\% improvement in data quality and observability.
+\end{itemize}
+
+\textit{Data Marketing \& Insights Intern} \hfill Jul 2021--Sep 2021
+\begin{itemize}[leftmargin=0.15in, itemsep=1pt, parsep=0pt]
+    \item Enhanced efficiency of EV network planning policies by conducting in-depth exploratory analysis with KMeans clustering to derive growth insights and integrated results into a reporting dashboard, enabling stakeholders to monitor charging performance and marketing initiatives in real time.
+\end{itemize}
+
+\resumesection{Publications}
+
+\textbf{A Comparison of LLM Finetuning Methods \& Evaluation Metrics with Travel Chatbot Use Case} \\
+Implemented various fine-tuning techniques such as Supervised fine-tuning (SFT), Retrieval Augmented fine-tuning, and Reinforcement Learning with Human Feedback (RLHF).
+
+\resumesection{Education}
+
+\textbf{San Jose State University \hfill San Jose, CA} \\
+\textit{Master of Science, Data Analytics} \hfill Graduated May 2024 \\
+
+\textbf{University of California, Davis \hfill Davis, CA} \\
+\textit{Bachelor of Science, Statistics} \hfill Graduated Jun 2020
+
+\resumesection{Skills}
+
+\begin{itemize}[leftmargin=0.15in, label={}, itemsep=1pt, parsep=0pt]
+    \small{\item{
+    \textbf{Languages}{: Python, R, SQL} \\
+    \textbf{Data Engineering \& Processing}{: PySpark, Pandas, NumPy, scikit-learn, SageMaker, LangChain} \\
+    \textbf{LLM \& ML Frameworks}{: AWS SageMaker, AWS Bedrock, Dataiku DSS, PyTorch} \\
+    \textbf{Cloud Platforms}{: AWS (S3, Lambda, Redshift), GCP BigQuery, Azure AI Indexes} \\
+    \textbf{DevOps \& Containerization}{: Docker, Git, CI/CD pipelines} \\
+    \textbf{Development Tools}{: VSCode, Jupyter Notebooks} \\
+    \textbf{Project Management \& Documentation}{: Jira, Confluence}
+    }}
+\end{itemize}
+
+\end{document}
