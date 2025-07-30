@@ -1,0 +1,11 @@
+*.pycache/
+*.pyc
+*.pyo
+*.pyd
+*.pyw
+*.pyz
+*.pywz
+*.pyzw
+*.aux
+*.log
+*.out
