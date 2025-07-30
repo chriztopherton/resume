@@ -214,7 +214,7 @@ Feel free to fork this repository and customize it for your own use. The code is
 
 ## 📞 Contact
 
-- **Email**: christopher.ton@sjsu.edu
+- **Email**: vchristopherton@gmail.com
 - **LinkedIn**: [linkedin.com/in/chriztopherton](https://linkedin.com/in/chriztopherton)
 - **GitHub**: [github.com/chriztopherton](https://github.com/chriztopherton)
 

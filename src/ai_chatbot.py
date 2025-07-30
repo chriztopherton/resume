@@ -27,7 +27,7 @@ class AIChatbot:
         **Personal Info:**
         - Name: Christopher Ton
         - Title: ML/Data Engineer
-        - Email: christopher.ton@sjsu.edu
+        - Email: vchristopherton@gmail.com
 
         **Work Experience:**
         1. Genentech - Data Engineer (Apr 2024 - Present)
@@ -62,7 +62,7 @@ class AIChatbot:
         - Relevant coursework and certifications in data science and engineering
 
         **Contact:**
-        - Email: christopher.ton@sjsu.edu
+        - Email: vchristopherton@gmail.com
         - LinkedIn and other contact information available in the Contact section
 
         Your role is to provide helpful, accurate information about Christopher's background, experience, skills, and projects. Be conversational, professional, and always refer to the information provided above. If asked about something not covered in this context, politely redirect to the relevant sections of the resume or suggest contacting Christopher directly.

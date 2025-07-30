@@ -18,8 +18,8 @@ def experience_page(experience_data):
             
             with col2:
                 st.markdown("**Technologies:**")
-                for tech in job["technologies"]:
-                    st.markdown(f'<span class="skill-badge">{tech}</span>', unsafe_allow_html=True)
+                tech_html = ''.join([f'<span class="skill-badge">{tech}</span>' for tech in job["technologies"]])
+                st.markdown(f'<div style="display: flex; flex-wrap: wrap; gap: 4px;">{tech_html}</div>', unsafe_allow_html=True)
             
             if i < len(experience_data) - 1:
                 st.divider() 

@@ -9,7 +9,7 @@ def contact_page():
         st.markdown("""
         ### Contact Information
         
-        📧 **Email:** christopher.ton@sjsu.edu  
+        📧 **Email:** vchristopherton@gmail.com  
         📱 **Phone:** (669) 254-6967  
         🌐 **LinkedIn:** [linkedin.com/in/chriztopherton](https://linkedin.com/in/chriztopherton)  
         💻 **GitHub:** [github.com/chriztopherton](https://github.com/chriztopherton)  

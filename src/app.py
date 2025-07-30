@@ -74,7 +74,39 @@ st.markdown("""
         color: #7f8c8d;
         margin-bottom: 2rem;
     }
+    .linkedin-badge {
+        background: linear-gradient(135deg, #0077b5, #005885);
+        color: white;
+        padding: 1rem;
+        border-radius: 10px;
+        text-align: center;
+        margin: 1rem 0;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: transform 0.2s ease;
+    }
+    .linkedin-badge:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    }
+    .linkedin-badge h4 {
+        margin: 0 0 0.5rem 0;
+        font-size: 1.2rem;
+    }
+    .linkedin-badge p {
+        margin: 0;
+        font-size: 0.9rem;
+        opacity: 0.9;
+    }
+    .linkedin-badge a {
+        color: white;
+        text-decoration: none;
+        display: block;
+    }
+    .linkedin-badge a:hover {
+        color: #e1f5fe;
+    }
 </style>
+<script type="text/javascript" src="https://platform.linkedin.com/badges/js/profile.js" async defer></script>
 """, unsafe_allow_html=True)
 
 # Navigation

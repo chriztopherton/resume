@@ -12,8 +12,8 @@ def projects_page(projects_data):
             
             with col1:
                 st.markdown("**Technologies Used:**")
-                for tech in project["technologies"]:
-                    st.markdown(f'<span class="skill-badge">{tech}</span>', unsafe_allow_html=True)
+                tech_html = ''.join([f'<span class="skill-badge">{tech}</span>' for tech in project["technologies"]])
+                st.markdown(f'<div style="display: flex; flex-wrap: wrap; gap: 4px;">{tech_html}</div>', unsafe_allow_html=True)
             
             with col2:
                 st.markdown("**Impact:**")

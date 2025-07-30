@@ -3,7 +3,7 @@ name = "resume"
 version = "0.1.0"
 description = "Professional resume website built with Streamlit"
 authors = [
-    {name = "chriztopherton",email = "christopher.ton@sjsu.edu"}
+    {name = "chriztopherton",email = "vchristopherton@gmail.com"}
 ]
 readme = "README.md"
 requires-python = ">=3.11,<3.12"

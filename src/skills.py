@@ -9,11 +9,8 @@ def skills_page(skills_data):
     
     for tab, (category, skills) in zip(tabs, skills_data.items()):
         with tab:
-            cols = st.columns(3)
-            for i, skill in enumerate(skills):
-                col_idx = i % 3
-                with cols[col_idx]:
-                    st.markdown(f'<span class="skill-badge">{skill}</span>', unsafe_allow_html=True)
+            skills_html = ''.join([f'<span class="skill-badge">{skill}</span>' for skill in skills])
+            st.markdown(f'<div style="display: flex; flex-wrap: wrap; gap: 4px;">{skills_html}</div>', unsafe_allow_html=True)
     
     # Skills visualization
     st.markdown("### Skills Overview")
