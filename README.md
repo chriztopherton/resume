@@ -46,9 +46,10 @@ A modern, interactive resume website built with Streamlit showcasing my experien
 
 3. **Set up AI Chatbot (Optional)**:
    ```bash
-   # Create a .env file with your OpenAI API key
-   echo "openai_api_key=your_openai_api_key_here" > .env
+   # Copy the example environment file
+   cp .env.example .env
    
+   # Edit .env and add your OpenAI API key
    # Get your API key from: https://platform.openai.com/api-keys
    # Replace 'your_openai_api_key_here' with your actual API key
    ```
@@ -109,6 +110,9 @@ The application uses custom CSS for professional styling. You can modify:
 - Component styling
 
 ## 🔧 Troubleshooting
+
+### Security Note
+⚠️ **Important**: Never commit your `.env` file to version control. The `.env` file is already in `.gitignore` to prevent accidental commits. Always use `.env.example` as a template and add your actual API keys locally.
 
 ### AI Chatbot Issues
 If the AI chatbot is not responding:
