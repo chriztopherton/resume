@@ -189,7 +189,7 @@ def render_ai_chatbot():
         # Add some helpful suggestions
         st.markdown("---")
         st.markdown("**💡 Try asking:**")
-        st.markdown("- What's Christopher's experience with AWS?")
+        st.markdown("- What's Christopher's experience with XYZ?")
         st.markdown("- Tell me about his projects at Genentech")
         st.markdown("- What ML frameworks does he know?")
         st.markdown("- How can I contact him?")
