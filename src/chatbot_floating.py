@@ -1,6 +1,7 @@
 import streamlit as st
 import streamlit.components.v1 as components
 
+
 class FloatingChatbot:
     def __init__(self):
         self.resume_data = {
@@ -15,8 +16,8 @@ class FloatingChatbot:
                         "Built and deployed a full stack LLM-powered chat assistant using Streamlit",
                         "Designed scalable ETL pipelines for Azure AI Search",
                         "Developed serverless APIs using AWS Lambda, S3, Bedrock, and OpenSearch",
-                        "Engineered data models in Snowflake using Talend, PySpark, and SQL"
-                    ]
+                        "Engineered data models in Snowflake using Talend, PySpark, and SQL",
+                    ],
                 },
                 {
                     "company": "Genentech",
@@ -24,77 +25,94 @@ class FloatingChatbot:
                     "duration": "Jun 2022 - Apr 2024",
                     "key_achievements": [
                         "Reduced resolution times by 20% with predictive anomaly detection models",
-                        "Automated clinical reporting validation processes using R"
-                    ]
-                }
+                        "Automated clinical reporting validation processes using R",
+                    ],
+                },
             ],
             "skills": {
                 "Languages": ["Python", "R", "SQL"],
-                "Data Engineering": ["PySpark", "Pandas", "NumPy", "scikit-learn", "SageMaker", "LangChain"],
-                "Cloud Platforms": ["AWS (S3, Lambda, Redshift)", "GCP BigQuery", "Azure AI Indexes"],
-                "DevOps": ["Docker", "Git", "CI/CD pipelines"]
+                "Data Engineering": [
+                    "PySpark",
+                    "Pandas",
+                    "NumPy",
+                    "scikit-learn",
+                    "SageMaker",
+                    "LangChain",
+                ],
+                "Cloud Platforms": [
+                    "AWS (S3, Lambda, Redshift)",
+                    "GCP BigQuery",
+                    "Azure AI Indexes",
+                ],
+                "DevOps": ["Docker", "Git", "CI/CD pipelines"],
             },
             "projects": [
                 {
                     "title": "LLM-Powered Chat Assistant",
-                    "description": "Full-stack application using Streamlit with end-to-end architecture"
+                    "description": "Full-stack application using Streamlit with end-to-end architecture",
                 },
                 {
                     "title": "RAG Applications with Serverless APIs",
-                    "description": "Multiple Retrieval-Augmented Generation applications using AWS services"
-                }
-            ]
+                    "description": "Multiple Retrieval-Augmented Generation applications using AWS services",
+                },
+            ],
         }
-    
+
     def get_response(self, user_input):
         """Generate a response based on user input and resume data"""
         user_input_lower = user_input.lower()
-        
+
         # Initialize response
-        response = "I'm here to help you learn more about Christopher Ton's background and experience. "
-        
+        response = (
+            "I'm here to help you learn more about Christopher Ton's background and experience. "
+        )
+
         # Check for specific questions
         if any(word in user_input_lower for word in ["experience", "work", "job", "career"]):
             response += "Christopher has worked at Genentech as a Data Engineer (Apr 2024 - Present) and Data Scientist Intern (Jun 2022 - Apr 2024), at Deloitte as a Data Engineer (Feb 2022 - May 2022), and at Shell Recharge as a Data Curator (Nov 2021 - Mar 2022). "
-        
-        elif any(word in user_input_lower for word in ["skills", "technologies", "tools", "languages"]):
+
+        elif any(
+            word in user_input_lower for word in ["skills", "technologies", "tools", "languages"]
+        ):
             response += "Christopher's key skills include Python, R, SQL, PySpark, AWS services, Docker, and various ML frameworks. He's experienced with cloud platforms like AWS, GCP, and Azure. "
-        
+
         elif any(word in user_input_lower for word in ["projects", "portfolio"]):
             response += "Key projects include an LLM-powered chat assistant built with Streamlit, RAG applications using AWS services, predictive anomaly detection models, and clinical reporting validation automation. "
-        
+
         elif any(word in user_input_lower for word in ["education", "degree", "school"]):
             response += "Christopher's educational background includes relevant coursework and certifications in data science and engineering. "
-        
+
         elif any(word in user_input_lower for word in ["contact", "email", "linkedin", "reach"]):
             response += "You can find Christopher's contact information in the Contact section of this resume. "
-        
+
         elif any(word in user_input_lower for word in ["hello", "hi", "hey"]):
             response = "Hello! I'm here to help you learn more about Christopher Ton's professional background. Feel free to ask about his experience, skills, projects, or anything else! "
-        
+
         elif any(word in user_input_lower for word in ["help", "what can you do"]):
             response = "I can help you learn about Christopher's work experience, technical skills, projects, education, and contact information. Just ask me anything about his background! "
-        
+
         else:
             response += "I can help you learn about Christopher's experience, skills, projects, and background. What would you like to know more about? "
-        
+
         return response
+
 
 def render_floating_chatbot():
     """Render a floating chatbot that can be toggled on/off"""
-    
+
     # Initialize session state
-    if 'floating_chatbot' not in st.session_state:
+    if "floating_chatbot" not in st.session_state:
         st.session_state.floating_chatbot = FloatingChatbot()
-    
-    if 'floating_chat_messages' not in st.session_state:
+
+    if "floating_chat_messages" not in st.session_state:
         st.session_state.floating_chat_messages = []
-    
-    if 'floating_chat_open' not in st.session_state:
+
+    if "floating_chat_open" not in st.session_state:
         st.session_state.floating_chat_open = False
-    
+
     # Add CSS for floating elements
-    st.markdown("""
+    st.markdown(
+        """
     <style>
     .floating-chat-button {
         position: fixed;
@@ -210,32 +228,38 @@ def render_floating_chatbot():
         background-color: #2980b9;
     }
     </style>
-    """, unsafe_allow_html=True)
-    
+    """,
+        unsafe_allow_html=True,
+    )
+
     # Floating chat button
-    if st.button("💬", key="floating_chat_toggle", help="Chat with me about Christopher's background"):
+    if st.button(
+        "Chat", key="floating_chat_toggle", help="Chat with me about Christopher's background"
+    ):
         st.session_state.floating_chat_open = not st.session_state.floating_chat_open
         st.rerun()
-    
+
     # Floating chat container
     if st.session_state.floating_chat_open:
         # Create the chat interface using HTML
-        chat_html = f"""
+        chat_html = """
         <div class="floating-chat-container">
             <div class="floating-chat-header">
-                <span>💬 Resume Assistant</span>
+                <span>Resume Assistant</span>
                 <button class="floating-chat-close" onclick="closeChat()">×</button>
             </div>
             <div class="floating-chat-messages" id="floating-chat-messages">
         """
-        
+
         # Add messages
         for message in st.session_state.floating_chat_messages:
             if message["role"] == "user":
                 chat_html += f'<div class="floating-message floating-user-message">{message["content"]}</div>'
             else:
-                chat_html += f'<div class="floating-message floating-bot-message">{message["content"]}</div>'
-        
+                chat_html += (
+                    f'<div class="floating-message floating-bot-message">{message["content"]}</div>'
+                )
+
         chat_html += """
             </div>
             <div class="floating-chat-input">
@@ -243,7 +267,7 @@ def render_floating_chatbot():
                 <button onclick="sendMessage()">Send</button>
             </div>
         </div>
-        
+
         <script>
         function sendMessage() {{
             const input = document.getElementById('floating-chat-input');
@@ -257,19 +281,19 @@ def render_floating_chatbot():
                 input.value = '';
             }}
         }}
-        
+
         function handleKeyPress(event) {{
             if (event.key === 'Enter') {{
                 sendMessage();
             }}
         }}
-        
+
         function closeChat() {{
             window.parent.postMessage({{
                 type: 'floating_chat_close'
             }}, '*');
         }}
-        
+
         // Auto-scroll to bottom
         function scrollToBottom() {{
             const chatMessages = document.getElementById('floating-chat-messages');
@@ -277,10 +301,10 @@ def render_floating_chatbot():
                 chatMessages.scrollTop = chatMessages.scrollHeight;
             }}
         }}
-        
+
         // Scroll when page loads
         window.addEventListener('load', scrollToBottom);
-        
+
         // Listen for messages from Streamlit
         window.addEventListener('message', function(event) {{
             if (event.data.type === 'floating_chat_update') {{
@@ -292,13 +316,19 @@ def render_floating_chatbot():
         }});
         </script>
         """
-        
+
         # Render the chat interface
         components.html(chat_html, height=500, width=350)
-        
+
         # Handle chat input (simplified for now)
         if st.button("Send Test Message", key="test_message"):
-            st.session_state.floating_chat_messages.append({"role": "user", "content": "Hello! Tell me about Christopher's experience."})
-            bot_response = st.session_state.floating_chatbot.get_response("Hello! Tell me about Christopher's experience.")
-            st.session_state.floating_chat_messages.append({"role": "assistant", "content": bot_response})
-            st.rerun() 
+            st.session_state.floating_chat_messages.append(
+                {"role": "user", "content": "Hello! Tell me about Christopher's experience."}
+            )
+            bot_response = st.session_state.floating_chatbot.get_response(
+                "Hello! Tell me about Christopher's experience."
+            )
+            st.session_state.floating_chat_messages.append(
+                {"role": "assistant", "content": bot_response}
+            )
+            st.rerun()

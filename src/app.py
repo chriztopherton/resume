@@ -1,41 +1,37 @@
 import streamlit as st
 from streamlit_option_menu import option_menu
-import time
-import random
 
-# Import modularized pages
-from home import home_page
-from experience import experience_page
-from skills import skills_page
-from projects import projects_page
-from education import education_page
+from ai_chatbot import render_ai_chatbot
+
+# Import chatbot
 from contact import contact_page
 
 # Import data
-from data import experience_data, skills_data, projects_data
+from data import experience_data, skills_data
+from education import education_page
+from experience import experience_page
 
-# Import chatbot
-from chatbot import render_chatbot
-from chatbot_floating import render_floating_chatbot
-from ai_chatbot import render_ai_chatbot, render_floating_ai_chatbot
+# Import modularized pages
+from home import home_page
 
 # Page configuration
 st.set_page_config(
     page_title="Christopher Ton - ML/Data Engineer",
-    page_icon="🚀",
+    page_icon=None,
     layout="wide",
-    initial_sidebar_state="expanded"
+    initial_sidebar_state="expanded",
 )
 
 # Enhanced Custom CSS with animations and modern design
-st.markdown("""
+st.markdown(
+    """
 <style>
     /* Modern gradient background */
     .main {
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         min-height: 100vh;
     }
-    
+
     /* Animated header with typing effect */
     .main-header {
         font-size: 3.5rem;
@@ -49,13 +45,13 @@ st.markdown("""
         margin-bottom: 1rem;
         text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
     }
-    
+
     @keyframes gradientShift {
         0% { background-position: 0% 50%; }
         50% { background-position: 100% 50%; }
         100% { background-position: 0% 50%; }
     }
-    
+
     @keyframes fadeInUp {
         from {
             opacity: 0;
@@ -66,7 +62,7 @@ st.markdown("""
             transform: translateY(0);
         }
     }
-    
+
     /* Enhanced section headers with hover effects */
     .section-header {
         font-size: 2.2rem;
@@ -78,12 +74,12 @@ st.markdown("""
         position: relative;
         transition: all 0.3s ease;
     }
-    
+
     .section-header:hover {
         transform: translateX(10px);
         border-bottom-color: #e74c3c;
     }
-    
+
     .section-header::after {
         content: '';
         position: absolute;
@@ -94,11 +90,11 @@ st.markdown("""
         background: linear-gradient(90deg, #3498db, #e74c3c);
         transition: width 0.3s ease;
     }
-    
+
     .section-header:hover::after {
         width: 100%;
     }
-    
+
     /* Enhanced job cards with hover animations */
     .job-card {
         background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
@@ -109,13 +105,13 @@ st.markdown("""
         transition: all 0.3s ease;
         border-left: 4px solid #3498db;
     }
-    
+
     .job-card:hover {
         transform: translateY(-5px) scale(1.02);
         box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
         border-left-color: #e74c3c;
     }
-    
+
     .job-title {
         font-size: 1.4rem;
         font-weight: bold;
@@ -123,17 +119,17 @@ st.markdown("""
         margin-bottom: 0.5rem;
         transition: color 0.3s ease;
     }
-    
+
     .job-card:hover .job-title {
         color: #e74c3c;
     }
-    
+
     .company-name {
         font-size: 1.2rem;
         color: #7f8c8d;
         font-weight: 500;
     }
-    
+
     /* Enhanced skill badges with animations */
     .skill-badge {
         background: linear-gradient(135deg, #3498db, #2980b9);
@@ -147,13 +143,13 @@ st.markdown("""
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         cursor: pointer;
     }
-    
+
     .skill-badge:hover {
         transform: translateY(-2px) scale(1.05);
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         background: linear-gradient(135deg, #e74c3c, #c0392b);
     }
-    
+
     /* Enhanced metric cards with pulse animation */
     .metric-card {
         background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
@@ -165,12 +161,12 @@ st.markdown("""
         position: relative;
         overflow: hidden;
     }
-    
+
     .metric-card:hover {
         transform: translateY(-3px);
         box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
     }
-    
+
     .metric-card::before {
         content: '';
         position: absolute;
@@ -181,11 +177,11 @@ st.markdown("""
         background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
         transition: left 0.5s ease;
     }
-    
+
     .metric-card:hover::before {
         left: 100%;
     }
-    
+
     .metric-number {
         font-size: 2.5rem;
         font-weight: bold;
@@ -193,13 +189,13 @@ st.markdown("""
         text-align: center;
         margin-bottom: 0.5rem;
     }
-    
+
     .metric-description {
         text-align: center;
         color: #7f8c8d;
         font-size: 0.9rem;
     }
-    
+
     /* Enhanced contact info */
     .contact-info {
         text-align: center;
@@ -212,7 +208,7 @@ st.markdown("""
         backdrop-filter: blur(10px);
         animation: fadeInUp 1s ease-out 0.5s both;
     }
-    
+
     /* Enhanced LinkedIn badge with 3D effect */
     .linkedin-badge {
         background: linear-gradient(135deg, #0077b5, #005885);
@@ -226,7 +222,7 @@ st.markdown("""
         position: relative;
         overflow: hidden;
     }
-    
+
     .linkedin-badge::before {
         content: '';
         position: absolute;
@@ -238,23 +234,23 @@ st.markdown("""
         transform: translateX(-100%);
         transition: transform 0.6s ease;
     }
-    
+
     .linkedin-badge:hover {
         transform: translateY(-5px) scale(1.02);
         box-shadow: 0 12px 35px rgba(0, 123, 181, 0.4);
     }
-    
+
     .linkedin-badge:hover::before {
         transform: translateX(100%);
     }
-    
+
     .linkedin-badge h4 {
         margin: 0 0 0.5rem 0;
         font-size: 1.3rem;
         position: relative;
         z-index: 1;
     }
-    
+
     .linkedin-badge p {
         margin: 0;
         font-size: 1rem;
@@ -262,7 +258,7 @@ st.markdown("""
         position: relative;
         z-index: 1;
     }
-    
+
     .linkedin-badge a {
         color: white;
         text-decoration: none;
@@ -270,11 +266,11 @@ st.markdown("""
         position: relative;
         z-index: 1;
     }
-    
+
     .linkedin-badge a:hover {
         color: #e1f5fe;
     }
-    
+
     /* Project cards with glassmorphism effect */
     .project-card {
         background: rgba(255, 255, 255, 0.1);
@@ -287,7 +283,7 @@ st.markdown("""
         position: relative;
         overflow: hidden;
     }
-    
+
     .project-card::before {
         content: '';
         position: absolute;
@@ -299,16 +295,16 @@ st.markdown("""
         transform: scaleX(0);
         transition: transform 0.3s ease;
     }
-    
+
     .project-card:hover {
         transform: translateY(-5px);
         box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
     }
-    
+
     .project-card:hover::before {
         transform: scaleX(1);
     }
-    
+
     /* Animated progress bars */
     .progress-container {
         background: rgba(255, 255, 255, 0.1);
@@ -317,7 +313,7 @@ st.markdown("""
         margin: 1rem 0;
         backdrop-filter: blur(10px);
     }
-    
+
     .progress-bar {
         height: 8px;
         background: linear-gradient(90deg, #3498db, #e74c3c);
@@ -326,7 +322,7 @@ st.markdown("""
         position: relative;
         overflow: hidden;
     }
-    
+
     .progress-bar::after {
         content: '';
         position: absolute;
@@ -337,12 +333,12 @@ st.markdown("""
         background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
         animation: shimmer 2s infinite;
     }
-    
+
     @keyframes shimmer {
         0% { left: -100%; }
         100% { left: 100%; }
     }
-    
+
     /* Floating action button */
     .fab {
         position: fixed;
@@ -362,12 +358,12 @@ st.markdown("""
         transition: all 0.3s ease;
         z-index: 999;
     }
-    
+
     .fab:hover {
         transform: scale(1.1);
         box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
     }
-    
+
     /* Loading animation */
     .loading {
         display: inline-block;
@@ -378,11 +374,11 @@ st.markdown("""
         border-top-color: #fff;
         animation: spin 1s ease-in-out infinite;
     }
-    
+
     @keyframes spin {
         to { transform: rotate(360deg); }
     }
-    
+
     /* Responsive design */
     @media (max-width: 768px) {
         .main-header {
@@ -392,11 +388,13 @@ st.markdown("""
             font-size: 1.8rem;
         }
     }
-    
+
 
 </style>
 <script type="text/javascript" src="https://platform.linkedin.com/badges/js/profile.js" async defer></script>
-""", unsafe_allow_html=True)
+""",
+    unsafe_allow_html=True,
+)
 
 # Enhanced Navigation with animations
 selected = option_menu(
@@ -408,11 +406,11 @@ selected = option_menu(
     orientation="horizontal",
     styles={
         "container": {
-            "padding": "0!important", 
+            "padding": "0!important",
             "background-color": "#ffffff",
             "border-radius": "10px",
             # "margin": "1rem 0",
-            "box-shadow": "0 2px 10px rgba(0, 0, 0, 0.1)"
+            "box-shadow": "0 2px 10px rgba(0, 0, 0, 0.1)",
         },
         # "icon": {"color": "#3498db", "font-size": "18px"},
         "nav-link": {
@@ -422,21 +420,24 @@ selected = option_menu(
             # "--hover-color": "#e74c3c",
             "border-radius": "10px",
             "transition": "all 0.3s ease",
-            "padding": "0.75rem 1rem"
+            "padding": "0.75rem 1rem",
         },
         "nav-link-selected": {
             "background-color": "#3498db",
             # "color": "white"
         },
-    }
+    },
 )
 
 # Add floating action button for quick contact
-st.markdown("""
+st.markdown(
+    """
 <div class="fab" onclick="window.open('mailto:vchristopherton@gmail.com')">
-    📧
+    Email
 </div>
-""", unsafe_allow_html=True)
+""",
+    unsafe_allow_html=True,
+)
 
 # Main app logic with enhanced user experience
 if selected == "Home":
