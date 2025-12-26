@@ -2,9 +2,8 @@ import os
 
 import streamlit as st
 from dotenv import load_dotenv
-from langchain.chains import LLMChain
-from langchain.memory import ConversationBufferMemory
-from langchain.prompts import ChatPromptTemplate, MessagesPlaceholder
+from langchain_core.messages import AIMessage, HumanMessage
+from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 from langchain_openai import ChatOpenAI
 
 # Load environment variables
@@ -46,7 +45,7 @@ class AIChatbot:
 
         3. Marketing Data Analyst Intern @ Volta Charging: (July 2021 - September 2021)
         Developed and maintained executive client-facing dashboards that automates information query to status report on EV performance, sustainability ad-hoc analysis requests, business insights across 10+ months
-        Performed product, time series, geographical and longitudinal analyses to uncover correlations among consumer behavior and trends with, leveraging Sigma Computing, Looker, SQL, Excel, Python, Snowflake, ESRI to retrieve, manipulate, analyze ads campaign KPI’s and usage rates
+        Performed product, time series, geographical and longitudinal analyses to uncover correlations among consumer behavior and trends with, leveraging Sigma Computing, Looker, SQL, Excel, Python, Snowflake, ESRI to retrieve, manipulate, analyze ads campaign KPI's and usage rates
         Collaborated cross-functionally with site sales, marketing, & engineering to support data storytelling
         Lead training sessions for internal stakeholders on the efficient querying process via dashboard interface & methodologies, promoting efficiency by 50% and 100% respectively
         Identified and recommended latencies within data governance infrastructure, took proactive measures to ensure data lineages across BI tool platform was consistent, independent, and durable
@@ -92,9 +91,6 @@ class AIChatbot:
         Your role is to provide helpful, accurate information about Christopher's background, experience, skills, and projects. Be conversational, professional, and always refer to the information provided above. If asked about something not covered in this context, politely redirect to the relevant sections of the resume or suggest contacting Christopher directly.
         """
 
-        # Initialize conversation memory
-        self.memory = ConversationBufferMemory(memory_key="chat_history", return_messages=True)
-
         # Create prompt template
         self.prompt = ChatPromptTemplate.from_messages(
             [
@@ -104,22 +100,34 @@ class AIChatbot:
             ]
         )
 
-        # Create LLM chain
-        self.chain = LLMChain(llm=self.llm, prompt=self.prompt, memory=self.memory, verbose=False)
+        # Create chain using LCEL (LangChain Expression Language)
+        self.chain = self.prompt | self.llm
 
-    def get_response(self, user_input):
+    def get_response(self, user_input, chat_history=None):
         """Generate AI-powered response using LangChain and OpenAI"""
         try:
-            # Get response from the chain
-            response = self.chain.run(input=user_input)
-            return response.strip()
+            # Prepare messages for the chain
+            messages = []
+            if chat_history:
+                for msg in chat_history:
+                    if msg["role"] == "user":
+                        messages.append(HumanMessage(content=msg["content"]))
+                    elif msg["role"] == "assistant":
+                        messages.append(AIMessage(content=msg["content"]))
+
+            # Invoke the chain
+            response = self.chain.invoke({"chat_history": messages, "input": user_input})
+
+            # Extract content from response
+            response_text = response.content if hasattr(response, "content") else str(response)
+            return response_text.strip()
         except Exception as e:
             st.error(f"Error generating response: {str(e)}")
             return "I apologize, but I'm having trouble generating a response right now. Please try again or check your internet connection."
 
     def clear_memory(self):
-        """Clear conversation memory"""
-        self.memory.clear()
+        """Clear conversation memory (no-op, kept for compatibility)"""
+        pass
 
 
 def render_ai_chatbot():
@@ -158,8 +166,11 @@ def render_ai_chatbot():
             # Show typing indicator
             with st.chat_message("assistant"):
                 with st.spinner("Thinking..."):
-                    # Get AI response
-                    bot_response = st.session_state.ai_chatbot.get_response(prompt)
+                    # Get AI response (pass chat history excluding the current message)
+                    chat_history = st.session_state.ai_chat_messages[
+                        :-1
+                    ]  # Exclude current user message
+                    bot_response = st.session_state.ai_chatbot.get_response(prompt, chat_history)
                     st.session_state.ai_chat_messages.append(
                         {"role": "assistant", "content": bot_response}
                     )
